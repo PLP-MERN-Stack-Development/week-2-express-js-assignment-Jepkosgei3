@@ -33,7 +33,6 @@ Swagger UI: `http://localhost:3000/api-docs`
 ## Landing Page at http://localhost:3000
 
 ![Landing Page](images/landingPage.png)
-
 ## CLI Workflow
 
 ### 1. List All Products
@@ -69,13 +68,14 @@ curl -X POST http://localhost:3000/api/products \
 ```bash
 curl -H "Accept: text/plain" http://localhost:3000/api/products
 ```
+```bash
 +--------+---------------------+---------------+-----------+----------+
 | ID     | Name                | Category      | Price     | In Stock |
 +--------+---------------------+---------------+-----------+----------+
 | 1... | MacBook Pro         | Electronics   | $ 2499.99 | ✓        |
 | 9d5b7c... | iPad Pro            | Electronics   | $ 1099.99 | ✓        |
 | 70fd77... | AirPods Pro         | Accessories   | $  249.99 | ✓        |
-
+```
 
 ### 3. Update Product Price
 ```bash
@@ -90,7 +90,7 @@ curl -X PUT http://localhost:3000/api/products/1 \
 curl -H "Accept: text/plain" http://localhost:3000/api/products
 
 ```
-
+```bash
 +--------+---------------------+---------------+-----------+----------+
 | ID     | Name                | Category      | Price     | In Stock |
 +--------+---------------------+---------------+-----------+----------+
@@ -99,6 +99,7 @@ curl -H "Accept: text/plain" http://localhost:3000/api/products
 | 70fd77... | AirPods Pro         | Accessories   | $  249.99 | ✓        |
 +--------+---------------------+---------------+-----------+----------+
 
+```
 ### 4. Delete a Product
 ```bash
 curl -X DELETE http://localhost:3000/api/products/70fd7736-aca1-4d07-8644-6149f2657109 \
