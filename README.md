@@ -1,63 +1,157 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=19744226&assignment_repo_type=AssignmentRepo)
-# Express.js RESTful API Assignment
 
-This assignment focuses on building a RESTful API using Express.js, implementing proper routing, middleware, and error handling.
+# Product Management API
 
-## Assignment Overview
+A RESTful API for managing products with CRUD operations, documented with Swagger UI.
 
-You will:
-1. Set up an Express.js server
-2. Create RESTful API routes for a product resource
-3. Implement custom middleware for logging, authentication, and validation
-4. Add comprehensive error handling
-5. Develop advanced features like filtering, pagination, and search
+## Setup
 
-## Getting Started
+### 1. Install Packages
+```bash
+npm install express mongoose swagger-jsdoc swagger-ui-express dotenv cors
+```
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install dependencies:
-   ```
-   npm install
-   ```
-4. Run the server:
-   ```
-   npm start
-   ```
+### 2. Configure Environment
+Create a `.env` file:
+```env
+PORT=3000
+API_KEY=your_secret_key
+```
 
-## Files Included
+Source the environment variables:
+```bash
+source .env
+```
 
-- `Week2-Assignment.md`: Detailed assignment instructions
-- `server.js`: Starter Express.js server file
-- `.env.example`: Example environment variables file
+### 3. Start the Server
+```bash
+npm start
+```
+Server runs at: `http://localhost:3000`  
+Swagger UI: `http://localhost:3000/api-docs`
 
-## Requirements
+---
+## Landing Page at http://localhost:3000
 
-- Node.js (v18 or higher)
-- npm or yarn
-- Postman, Insomnia, or curl for API testing
+![Landing Page](landingPage.png)
+## CLI Workflow
 
-## API Endpoints
+### 1. List All Products
+```bash
+curl -H "Accept: text/plain" http://localhost:3000/api/products
+```
+![List Products](images/list-products.png)
+### 2. Create Two Products
+```bash
+curl -X POST http://localhost:3000/api/products \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: ${API_KEY}" \
+  -d '{
+    "name": "iPad Pro",
+    "price": 1099.99,
+    "category": "Electronics",
+    "inStock": true
+  }'
 
-The API will have the following endpoints:
+curl -X POST http://localhost:3000/api/products \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: ${API_KEY}" \
+  -d '{
+    "name": "AirPods Pro",
+    "price": 249.99,
+    "category": "Accessories",
+    "inStock": true
+  }'
+```
+![Create Products](images/post2products.png ) 
 
-- `GET /api/products`: Get all products
-- `GET /api/products/:id`: Get a specific product
-- `POST /api/products`: Create a new product
-- `PUT /api/products/:id`: Update a product
-- `DELETE /api/products/:id`: Delete a product
+## Check Updated products
+```bash
+curl -H "Accept: text/plain" http://localhost:3000/api/products
+```
++--------+---------------------+---------------+-----------+----------+
+| ID     | Name                | Category      | Price     | In Stock |
++--------+---------------------+---------------+-----------+----------+
+| 1... | MacBook Pro         | Electronics   | $ 2499.99 | ✓        |
+| 9d5b7c... | iPad Pro            | Electronics   | $ 1099.99 | ✓        |
+| 70fd77... | AirPods Pro         | Accessories   | $  249.99 | ✓        |
 
-## Submission
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+### 3. Update Product Price
+```bash
+curl -X PUT http://localhost:3000/api/products/1 \
+  -H "Content-Type: application/json" \
+  -d '{"price":1199.99}'
+```
+![Update Product](images/updateProductPrice.png) 
 
-1. Complete all the required API endpoints
-2. Implement the middleware and error handling
-3. Document your API in the README.md
-4. Include examples of requests and responses
+## Check Updated products
+```bash
+curl -H "Accept: text/plain" http://localhost:3000/api/products
 
-## Resources
+```
 
-- [Express.js Documentation](https://expressjs.com/)
-- [RESTful API Design Best Practices](https://restfulapi.net/)
-- [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) 
++--------+---------------------+---------------+-----------+----------+
+| ID     | Name                | Category      | Price     | In Stock |
++--------+---------------------+---------------+-----------+----------+
+| 1... | MacBook Pro         | Electronics   | $ 2299.99 | ✓        |
+| 9d5b7c... | iPad Pro            | Electronics   | $ 1099.99 | ✓        |
+| 70fd77... | AirPods Pro         | Accessories   | $  249.99 | ✓        |
++--------+---------------------+---------------+-----------+----------+
+
+### 4. Delete a Product
+```bash
+curl -X DELETE http://localhost:3000/api/products/70fd7736-aca1-4d07-8644-6149f2657109 \
+  -H "X-API-Key: ${API_KEY}"
+```
+![Delete Product](images/deleteProduct.png) 
+
+---
+
+## Swagger UI Workflow
+
+### 1. Access Swagger UI
+
+Click on API Documentation Card on Landing Page 
+
+or
+
+Visit `http://localhost:3000/api-docs` in your browser.  
+
+![Swagger Home](images/swaggerPage.png) 
+### 2. Authorize
+Click "Authorize" and enter your API key.  
+![Swagger Auth](images/swagger-auth.png) <!-- Attach your image here -->
+
+### 3. Execute Operations
+- **GET /products**: List all products  
+  ![Swagger GET](images/getProductsSwagger.png)
+
+  ![Swagger GET Output](images/swaggerGetOutput.png)
+
+- **POST /products**: Create new products  
+  ![Swagger POST](images/postProductSwagger.png)
+  
+- **GET /product**: Get product by name  
+  ![Swagger GET](images/searchProduct.png)
+
+  ** Output
+  ![Swagger GET](images/searchOutput.png)
+
+- **PUT /products/{id}**: Update a product  
+  ![Swagger PUT](images/putProductSwagger.png)
+  
+  **Output
+
+  ![Swagger PUT](images/putProductOutput.png)
+
+- **DELETE /products/{id}**: Remove a product  
+  ![Swagger DELETE](images/deleteProductSwagger.png)
+
+---
+
+## Troubleshooting
+- **404 Errors**: Ensure routes include `/api` prefix
+- **401 Errors**: Verify `X-API-Key` header is set
+- **CORS Issues**: Confirm `app.use(cors())` is enabled
+```
+

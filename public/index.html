@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product API Portal</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="header">
+    <h1>Product Management Portal</h1>
+    <p>Explore products or API documentation</p>
+  </div>
+
+  <div class="cards-container">
+    <!-- Product Card -->
+    <div class="card product-card" onclick="window.location.href='/api/products'">
+      <div class="card-content">
+        <h2>Product Catalog</h2>
+        <p>View all available products</p>
+        <div class="icon">📦</div>
+      </div>
+    </div>
+    
+    <!-- Swagger Card -->
+    <div class="card swagger-card" onclick="window.location.href='/api-docs'">
+      <div class="card-content">
+        <h2>API Documentation</h2>
+        <p>Interactive Swagger UI</p>
+        <div class="icon">{} </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
