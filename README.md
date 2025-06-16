@@ -39,7 +39,7 @@ Swagger UI: `http://localhost:3000/api-docs`
 ```bash
 curl -H "Accept: text/plain" http://localhost:3000/api/products
 ```
-![List Products](images/list-products.png)
+![List Products](images/get products-table.png)
 ### 2. Create Two Products
 ```bash
 curl -X POST http://localhost:3000/api/products \
