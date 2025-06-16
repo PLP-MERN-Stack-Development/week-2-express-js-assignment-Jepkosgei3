@@ -32,14 +32,15 @@ Swagger UI: `http://localhost:3000/api-docs`
 ---
 ## Landing Page at http://localhost:3000
 
-![Landing Page](landingPage.png)
+![Landing Page](images/landingPage.png)
+
 ## CLI Workflow
 
 ### 1. List All Products
 ```bash
 curl -H "Accept: text/plain" http://localhost:3000/api/products
 ```
-![List Products](images/list-products.png)
+![List Products](images/getProductsTable.png)
 ### 2. Create Two Products
 ```bash
 curl -X POST http://localhost:3000/api/products \
